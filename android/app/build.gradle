@@ -1,0 +1,48 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.integrador" // Cambia "com.example.integrador" por el namespace adecuado
+    compileSdk = 34 // Especifica explícitamente la versión de compileSdk
+
+    ndkVersion = "21.3.6528147" // Puedes reemplazar con tu versión de NDK instalada
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId = "com.example.integrador"
+        minSdk = 21 // Es recomendable tener al menos minSdk 21 para soporte de bibliotecas
+        targetSdk = 33 // Especifica explícitamente la versión de targetSdk
+        versionCode = 1
+        versionName = "1.0"
+
+        multiDexEnabled true // Habilita multidex para manejar más métodos si tienes muchas dependencias
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug // Cambia esto a un archivo de firma real en producción
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1' // Soporte para multidex
+}
+
+flutter {
+    source = "../.."
+}
